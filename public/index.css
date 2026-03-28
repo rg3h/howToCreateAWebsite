@@ -12,8 +12,16 @@
     \_/__________________/
 */
 
+h2 {
+  border-top: solid 1px rgb(200, 200, 200);
+  margin-top: 3rem;
+}
+
 h3 {
-  margin: 2rem 0 0.5rem 0;
+  font-family: var(--fontFamilyLight);
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 1rem 0 0 0;
 }
 
 pre {
@@ -23,15 +31,9 @@ pre {
   padding: 1rem;
 }
 
-.directoryBox {
-  background: white;
-  border: var(--border);
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-}
+table {
+  font-size: 0.9rem;
+}}
 
 .titleContainer {
   justify-content: flex-start;
@@ -62,11 +64,22 @@ pre {
   margin-right: 1rem;
 }
 
-.welcomeBanner {
-  color: rgb(0, 160, 50);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
+.note {
+  background-color: rgb(255, 235, 200);
+  border: solid 1px rgb(200, 200, 200);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
+  width: 100%;
+}
+
+.warning {
+  background-color: rgb(255, 255, 200);
+  border: solid 1px rgb(200, 200, 200);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
+  width: 100%;
 }
 
 /* detect narrow */

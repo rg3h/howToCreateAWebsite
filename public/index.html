@@ -54,20 +54,24 @@
     changes quickly, but the gist of the steps should be the same.
   </div>
 
-<h2>Summary</h2>
+  <h2 class=firstH2>Summary</h2>
   <ol>
-    <li>create Domain Name (link)</li>
-    <li>upload or link to content by one of several methods:</li>
+    <li><a href="https://rg3h.github.io/howToCreateADomain/">
+        create a domain name</a> (or use one you already have)</li>
+    <li>upload content by one of several methods:</li>
     <ul>
-      <li>using drag and drop</li>
-      <li>connecting to github</li>
-      <li>using Cloudflare Workers</li>
-      <li>pointing to AWS</li>
+      <li><a href="#usingDragAndDrop">using drag and drop</a></li>
+      <li><a href="#usingGitHub">connecting to github</a></li>
+      <li><a href="#usingCloudflareWorkers">using cloudflare workers</a></li>
+      <li><a href="#usingAWS">connecting to AWS</a></li>
     </ul>
-    <li>set up some DNS information (apex, redirects, etc)</li>
+    <li><a href="#otherThings">set up some extra information</a>&nbsp;
+      (routing http to https, 404.html, redirects, etc)</li>
   </ol>
 
-<h2>Direct Upload (Drag And Drop)</h2>
+  <!-- --------------------------------------------------------------- -->
+  <h2 id=usingDragAndDrop>Direct Upload (Drag And Drop)</h2>
+
   Direct Upload enables you to upload your content to CloudFlare Pages
   and deploy them to the Cloudflare global network. You should choose
   Direct Upload over git integration if you want to integrate your own
@@ -132,7 +136,14 @@
   <a href="https://developers.cloudflare.com/pages/get-started/direct-upload/#wrangler-cli">
     Getting started: direct upload with Wrangler</a>
 
-  <h2>Using github</h2>
+  <!-- --------------------------------------------------------------- -->
+  <h2 id="usingGitHub">Using github</h2>
+
+  You can put your content on github (for example, create a repo
+  called www.yoursite.com) and then connect cloudflare to the github
+  repository. Then everytime you push content, cloudflare runs a
+  worker to publish the content. You can control automatic builds, use
+  branches and preview links before publishing, etc.
 
   <div class=warning>
     <b>Warning:</b> if you deploy using github you cannot switch to
@@ -140,76 +151,115 @@
   </div>
 
   <div class=note>
-    <b>Note:</b> you can generate preview URLS for a commit to another
-    branch in the repository without affecting your production
-    deployment.
+    <b>Note:</b> before beginning, I recommend you name your github repo
+    www.yoursite.com (changing "yoursite" and "com").
   </div>
 
   <div class=note>
-    <b>Note:</b> if you do not want to trigger deployments
-    every time you push a commit, you can disable automatic
-    deployments or add [SI skip] to the commit message (see below).
+    <b>Note:</b> you can generate preview URLS for other
+    branches without affecting your production deployment.
+    And if you do not want to trigger deployments every time
+    you push, you can disable deployments
+    (see the <a href="otherThings">Other Things</a> section).
   </div>
 
   <br>
   <ol>
-    <li>On cloudflare's dashboard page, on the left side bar, click on:
-      Compute → Workers & Pages
-    </li>
-    <li>select create application -> pages -> connect to Git<br>
-      (this allows cloudflare to access your git repository)
-    </li>
-    <li>select your github repository</li>
-    <li>select install & authorize and Begin Setup</li>
-  </ol>
-  <br><br>
-
-  <ol>
-    <li>set up builds and deployments</li>
-    <li>select create application -> pages -> connect to Git
-      This allows cloudflare to access your git repositories
-    3) select your github repository
-    4) select install & authorize and Begin Setup
-    5) Set up builds and deployments
-  </ol>
-  <br><br>
-
-  to connect github as a cloudflare page:
-  <ol>
-    <li>a) go to cloudflare dashboard</li>
-    <li>b) over on the right there is a +Add  -- add pages</li>
-    <li>c) select Import an existing Git repository<br>
-      (Note this will connect and commits will automatically trigger builds)<br>
-       ( You can commit -m [SI skip] ....  to prevent the trigger)<br>
-       ( You can build a branch off main and not affect pub, but still
-         preview it with a temporary URL)
-    </li>
-    <li>da) you will need to give cloudflare access to the github repo<br>
-        so click on the link:<br>
-          "If your repository is not shown, configure repository
+    <li>on the cloudflare main dashboard click on the blue +Add button</li>
+    <li>from the drop-down menu pick Pages</li>
+    <li>select import an existing Git repository</li>
+    <li>give cloudflare access to the github repo by clicking on the link:<br>
+      "If your repository is not shown, configure repository
            access for the Cloudflare Pages app on GitHub."
     </li>
-    <li>db) confirm access using your 2-auth on your phone</li>
-    <li>dc) scroll down to "Repository Access" and click "Only select
-        reposirtories" and select the repo (for example www.quirky.com)<br>
-      weirdly it does not return you to the cloudflare page to continue,
-      so close the tab and go back to the page where you were connecting
-      the repo. You should see the box with www.quirky.place now.<br>
-      (inswert picture)
+    <li>this opens a new tab and confirms access by using your 2-auth
+    on your phone</li>
+    <li>scroll down to "Repository Access" and click "Only select
+        repositories" and select the repo</li>
+    <li>close the tab and go back to the cloudflare tab. You should
+    see a box with repo now
     </li>
-    <li>dd) click on the www.quirky.com (small checkmark) and then Begin
+    <li>click on the repo box's small checkmark and then the Begin
     Setup button</li>
-    <li>de) set the root directory or /public and click "Save and Deploy"
-      creates it at https://www-quirky-place.pages.dev/
+    <li>set the root directory to /public and click "Save and Deploy"<br>
+      this creates a site at https://www-yoursite-com.pages.dev/
     </li>
-    <li>e) click on the add a custom domain (on the success page)
+    <li>click on the add a custom domain (on the success page)<br>
        (this is the same as dashboard -> compute -> Workers & Pages
-          and the Custom domains tab along the top)
+          and then selecting the Custom domains tab along the top)
     </li>
-    <li>f) hit the add a custom domain and enter it
-      as www.quirky.com (not APEX)</li>
-    <li>g) wait a bit for the site to activate (a few minutes)</li>
+    <li>hit the add a custom domain and enter it as www.yoursite.com
+    (full name, not just the APEX name)</li>
+    <li>wait a few minutes for the site to activate</li>
+  </ol>
+  <br>
+  You will need to do some more things
+  such as redirecting the APEX to www, setting up a 404.html page,
+  etc.  Click <a href="#otherThings">Other Things To Do</a>
 
+  <h3>References</h3>
+  <a hre="https://developers.cloudflare.com/pages/get-started/git-integration/">
+    getting started: git integration</a><br>
+
+  <!-- --------------------------------------------------------------- -->
+  <h2 id="usingCloudflareWorkers">Using Cloudflare Workers</h2>
+
+  <div class=note>
+    <b>Note:</b> cloudflare workers also support Git integrations to
+    automatically build and deploy Workers from your connected Git
+    repository.
+    <a href="https://developers.cloudflare.com/workers/ci-cd/builds/">
+      Learn more in Workers Builds</a>
+  </div>
+
+  <ol>
+    <li>in git check-in a wrangler configuration file: wrangler.jsonc
+      <pre>
+        {
+          "name": "www-quirky-place",
+          "compatibility_date": "2026-01-31",
+          "assets": {
+           "directory": "./public"
+          }
+        }</pre>
+    </li>
+    <li>go to cloudflare and create/use existing custom domain (www.quirky.place)</li>
+    <li>dashboard -> Compute&AI -> Create application -> Pages -> Connect to Git</li>
+    <li>pick your cloudflare user, select repo want access</li>
+    <li>enter github user and use mobile phone auth code (or login) to verify</li>
+    <li>then pick github againa dn select a repository</li>
+    <li>add a custom domain to the worker/page under:<br>
+      compute & AI ->Workers & pages -> www-quirky-place settings tab<br>
+      domaind & routes  +Add<br>
+      www.quirky.place<br>
+    </li>
+  </ol>
+
+  <h3>References</h3>
+  <a href="https://developers.cloudflare.com/workers/ci-cd/builds/">
+    Learn more in Workers Builds</a><br>
+
+  <!-- --------------------------------------------------------------- -->
+  <h2 id="otherThings">Other Things To Do</h2>
+
+  To Remove cloudflare access to github repo go to the applications
+  page on github
+    https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/
+
+  setting up 404.html
+
+  <h3>To disable automatic builds on branches</h3>
+  <ol>
+    <li>Compute&AI -> workers & pages -> go to your pages project</li>
+    <li>go to Build -> edit branch cntrl -> turn off automatic branch deployments</li>
+    <li>or change Preview Branch ot None (Disable automatic branch deployments)</li>
+  </ol>
+
+  You can also skip an individual cloudflare build by adding a prefix to the
+  commig message: commit -m [CI skip] ...
+
+
+    <li
     <li>3) add rule to redirect root/apex to www (see also below)<br>
       e.g. https://quirky.place to https://www.quirky.place<br>
       cloudflare go to quirky.place<br>
@@ -229,65 +279,7 @@
     <li>6) on github, verify the domain so no one can take it:<br>
      https://github.com/settings/pages
     </li>
-  </ol>
-  <br><br>
-  To Remove cloudflare access to github repo go to the applications
-  page on github
-    https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/
 
-  <h3>To disable automatic builds on branches</h3>
-  <ol>
-    <li>Compute&AI -> workers & pages -> go to your pages project</li>
-    <li>go to Build -> edit branch cntrl -> turn off automatic branch deployments</li>
-    <li>or change Preview Branch ot None (Disable automatic branch deployments)</li>
-  </ol>
-
-  You can also skip an individual cloudflare build by adding a prefix to the
-  commig message: commit -m [CI skip] ...
-
-  <h3>References</h3>
-  <a hre="https://developers.cloudflare.com/pages/get-started/git-integration/">
-    getting started: git integration</a><br>
-
-  <h2>Using Cloudflare Workers</h2>
-
-  <div class=note>
-    <b>Note:</b> cloudflare workers also support Git integrations to
-    automatically build and deploy Workers from your connected Git
-    repository.
-    <a href="https://developers.cloudflare.com/workers/ci-cd/builds/">
-      Learn more in Workers Builds</a>
-  </div>
-
-  <ol>
-    <li>in git check-in a wrangler configuration file: wrangler.jsonc
-      <pre>
-        {
-          "name": "www-quirky-place",
-          "compatibility_date": "2026-01-31",
-          "assets": {
-           "directory": "./public"
-          }
-        }
-      </pre>
-    </li>
-    <li>go to cloudflare and create/use existing custom domain (www.quirky.place)</li>
-    <li>dashboard -> Compute&AI -> Create application -> Pages -> Connect to Git</li>
-    <li>pick your cloudflare user, select repo want access</li>
-    <li>enter github user and use mobile phone auth code (or login) to verify</li>
-    <li>then pick github againa dn select a repository</li>
-    <li>add a custom domain to the worker/page under:<br>
-      compute & AI ->Workers & pages -> www-quirky-place settings tab<br>
-      domaind & routes  +Add<br>
-      www.quirky.place<br>
-    </li>
-  </ol>
-
-  <h3>References</h3>
-  <a href="https://developers.cloudflare.com/workers/ci-cd/builds/">
-    Learn more in Workers Builds</a><br>
-
-  <h2>Other Things To Do</h2>
 
   <ol>
     <li>add rule to redirect root/apex to www (see also below)
@@ -355,8 +347,12 @@
   Then redirect to target URL: https://www.quirky.place/${1}<br>
   check the preserve query string<br>
 
-  <h2>Connecting to AWS</h2>
+  <h2 id="usingAWS">Connecting to AWS</h2>
   link here to connect to AWS
+
+  <h2>General References</h2>
+  <a href="https://developers.cloudflare.com/pages/functions/">
+    Cloudflare workers</a><br>
 
   </div> <!-- middle -->
 </body>

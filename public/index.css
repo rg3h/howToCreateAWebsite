@@ -12,9 +12,26 @@
     \_/__________________/
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
 h2 {
   border-top: solid 1px rgb(200, 200, 200);
   margin-top: 3rem;
+}
+
+.firstH2 {
+  border: none;
+  margin-top: 2rem;
+}
+
+#usingDragAndDrop,
+#usingGitHub,
+#usingCloudflareWorkers,
+#usingAWS,
+#otherThings {
+  scroll-margin-top: 2rem;
 }
 
 h3 {
@@ -22,6 +39,11 @@ h3 {
   font-size: 1.1rem;
   font-weight: bold;
   margin: 1rem 0 0 0;
+}
+
+ul, ol {
+  margin: 0 0 0.5rem 1rem;
+  padding: 0 0 0 1rem;
 }
 
 pre {
@@ -33,7 +55,7 @@ pre {
 
 table {
   font-size: 0.9rem;
-}}
+}
 
 .titleContainer {
   justify-content: flex-start;

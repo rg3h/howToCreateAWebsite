@@ -16,22 +16,19 @@ html {
   scroll-behavior: smooth;
 }
 
+.boxArrowLink {
+  margin-right: 1rem;
+  padding: 7px;
+}
+
 h2 {
-  border-top: solid 1px rgb(200, 200, 200);
-  margin-top: 3rem;
+//  border-top: solid 1px rgb(200, 200, 200);
+  margin-top: 1rem;
 }
 
 .firstH2 {
   border: none;
   margin-top: 2rem;
-}
-
-#usingDragAndDrop,
-#usingGitHub,
-#usingCloudflareWorkers,
-#usingAWS,
-#otherThings {
-  scroll-margin-top: 2rem;
 }
 
 h3 {
@@ -41,9 +38,10 @@ h3 {
   margin: 1rem 0 0 0;
 }
 
-ul, ol {
-  margin: 0 0 0.5rem 1rem;
-  padding: 0 0 0 1rem;
+.h3Variation {
+  border-top: solid 1px rgb(200, 200, 200);
+  font-weight: normal;
+  margin: 2rem 0 0 0;
 }
 
 pre {
@@ -53,8 +51,53 @@ pre {
   padding: 1rem;
 }
 
+svg {
+  display: inline-block;
+}
+
+details[open] {
+  border: solid 1px rgb(200, 200, 200);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+summary {
+  border: solid 1px transparent;
+  border-radius: 0;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  padding: 0 5px 0 5px;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+  transition-duration: 0.25s;
+  transition-property: border, box-shadow;
+  transition-timing-function: ease-in-out;
+  width: fit-content;
+}
+
+summary:hover {
+  border-radius: 3px;
+  border: solid 1px blue;
+  box-shadow: 3px 3px 3px rgba(100, 100, 100, 0.5);
+  text-decoration: none;
+}
+
+
 table {
   font-size: 0.9rem;
+}
+
+ul, ol {
+  margin: 0 0 0 2rem;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 0 0 1rem 0;
 }
 
 .titleContainer {
@@ -73,8 +116,8 @@ table {
 }
 
 .titleRight {
-  text-align: right;
   min-width: 100px;
+  text-align: right;
 }
 
 .titleText {
@@ -90,7 +133,7 @@ table {
   background-color: rgb(255, 235, 200);
   border: solid 1px rgb(200, 200, 200);
   font-size: 0.9rem;
-  margin-top: 1rem;
+  margin: 1rem 0 1rem 0;
   padding: 0.25rem 0.25rem 0.25rem 1rem;
   width: 100%;
 }
@@ -99,7 +142,7 @@ table {
   background-color: rgb(255, 255, 200);
   border: solid 1px rgb(200, 200, 200);
   font-size: 0.9rem;
-  margin-top: 1rem;
+  margin: 1rem 0 1rem 0;
   padding: 0.25rem 0.25rem 0.25rem 1rem;
   width: 100%;
 }

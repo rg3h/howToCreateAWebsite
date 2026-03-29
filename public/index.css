@@ -22,7 +22,6 @@ html {
 }
 
 h2 {
-//  border-top: solid 1px rgb(200, 200, 200);
   margin-top: 1rem;
 }
 
@@ -58,6 +57,7 @@ svg {
 details[open] {
   border: solid 1px rgb(200, 200, 200);
   border-radius: 1rem;
+  margin-bottom: 2rem;
   padding: 1rem;
 }
 
@@ -65,7 +65,7 @@ summary {
   border: solid 1px transparent;
   border-radius: 0;
   cursor: pointer;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   padding: 0 5px 0 5px;
   text-decoration: underline;
   text-underline-offset: 0.25rem;
@@ -97,7 +97,25 @@ ul {
 }
 
 li {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0;
+}
+
+.note {
+  background-color: rgb(255, 235, 200);
+  border: solid 1px rgb(200, 200, 200);
+  font-size: 0.9rem;
+  margin: 1rem 0 1rem 0;
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
+  width: 100%;
+}
+
+.warning {
+  background-color: rgb(255, 255, 200);
+  border: solid 1px rgb(200, 200, 200);
+  font-size: 0.9rem;
+  margin: 1rem 0 1rem 0;
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
+  width: 100%;
 }
 
 .titleContainer {
@@ -129,22 +147,11 @@ li {
   margin-right: 1rem;
 }
 
-.note {
-  background-color: rgb(255, 235, 200);
-  border: solid 1px rgb(200, 200, 200);
+.reference {
+  display: block;
   font-size: 0.9rem;
-  margin: 1rem 0 1rem 0;
-  padding: 0.25rem 0.25rem 0.25rem 1rem;
-  width: 100%;
-}
-
-.warning {
-  background-color: rgb(255, 255, 200);
-  border: solid 1px rgb(200, 200, 200);
-  font-size: 0.9rem;
-  margin: 1rem 0 1rem 0;
-  padding: 0.25rem 0.25rem 0.25rem 1rem;
-  width: 100%;
+  margin-bottom: 0.1rem;
+  padding: 2px;
 }
 
 /* detect narrow */

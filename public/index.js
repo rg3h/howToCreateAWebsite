@@ -1,26 +1,22 @@
 /**
  * @fileoverview index.js entry point into javascript
  */
-import {formatDate, updateOnTheMinute} from './modules/date/date.js';
-import {getVersion} from './modules/util/util.js';
 
 window.addEventListener('load', main);
 async function main() {
-  return init();
+  // Fetch all the details elements with the class 'accordion-item'
+  const details = document.querySelectorAll('.accordion');
+
+  // Add a click event listener to each details element
+  details.forEach((targetDetail) => {
+    targetDetail.addEventListener('click', () => {
+      // Loop through all details elements
+      details.forEach((detail) => {
+        // If the current detail is not the one clicked and its open, close it
+        if (detail !== targetDetail && detail.hasAttribute('open')) {
+          detail.removeAttribute('open');
+        }
+      });
+    });
+  });
 } // main
-
-async function init() {
-  updateTitleVersionEle();
-  updateOnTheMinute(updateTitleDateEle);
-  return 1;
-}
-
-function updateTitleVersionEle() {
-  let versionEle = document.getElementsByClassName('titleVersion');
-  versionEle.length>0 ? versionEle[0].innerText='version '+getVersion() : null;
-}
-
-function updateTitleDateEle() {
-  let dateEle = document.getElementsByClassName('titleDate');
-  dateEle.length > 0 ? dateEle[0].innerText = formatDate('DD MMMM YYYY') : null;
-}

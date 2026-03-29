@@ -26,7 +26,7 @@
       Given you have <a href="https://rg3h.github.io/howToCreateADomain/public/index.html">bought a domain</a>,
       these are step-by-step instructions on how to create a free, secure, scalable website on cloudflare.
      <br>
-      Your site can be populated by:
+      These steps also show you how to upload content by:
       <br>
         &nbsp;&nbsp;&nbsp;&nbsp; &bull; drag-and-drop<br>
         &nbsp;&nbsp;&nbsp;&nbsp; &bull; pointing to a github repo<br>

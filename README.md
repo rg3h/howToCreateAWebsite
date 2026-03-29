@@ -24,7 +24,7 @@
  <tr><td align=left>
     <sup>
       Given you have <a href="https://rg3h.github.io/howToCreateADomain/public/index.html">bought a domain</a>,
-      these are step-by-step instructions on how to create a free, secure, scalable website on cloudflare.
+      these are instructions on how to create a free, secure, scalable website on cloudflare.
      <br>
       These steps also show you how to upload content by:
       <br>

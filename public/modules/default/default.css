@@ -150,31 +150,41 @@ input, button, textarea, select {
 }
 
 h1 {
-  font-family: var(--fontFamilyExtraLight);
-  font-weight: 600;
-  margin-top: 0rem;
+  font-family:   var(--fontFamilyExtraLight);
+  font-weight:   normal;
+  margin-top:    0rem;
 }
 
-h2 {
-  font-family: var(--fontFamilyLight);
-  font-weight: 400;
-  margin-top: 2rem;
+h2, .h2 {
+  font-family:   var(--fontFamilyLight);
+  font-size:     1.4rem;
+  font-weight:   normal;
+  margin-top:    1rem;
 }
 
 h3 {
-  font-family: var(--fontFamilyExtraLight);
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0;
-  margin-top: 1rem;
+  font-family:   var(--fontFamilyLight);
+  font-size:     1.2rem;
+  font-weight:   normal;
+  margin:        1rem 0 0 0;
+}
+
+.h3WithTopBorder {
+  font-family:   var(--fontFamilyLight);
+  border-top:    solid 1px rgb(200, 200, 200);
+  font-size:     1.2rem;
+  font-weight:   normal;
+  margin:        1rem 0 0 0;
+
 }
 
 h4 {
-  font-family: var(--fontFamilyLight);
-  font-size: 1rem;
-  font-weight: 600;
+  font-family:   var(--fontFamilyLight);
+  font-size:     1rem;
+  font-weight:   600;
+  font-weight:   normal;
   margin-bottom: 0;
-  margin-top: 1rem;
+  margin-top:    1rem;
 }
 
 pre {
@@ -194,10 +204,17 @@ td, th {
   vertical-align: top;
 }
 
-tr {border-collapse: collapse;}
-tr:nth-child(even) {background-color: rgb(240, 240, 240);}
+tr {
+  border-collapse: collapse;
+}
 
-ul {margin-top: 0.5rem;}
+tr:nth-child(even) {
+  background-color: rgb(240, 240, 240);
+}
+
+ul {
+  margin-top: 0.5rem;
+}
 
 .blueBox, .whiteBox {
   border-radius: var(--borderRadius);

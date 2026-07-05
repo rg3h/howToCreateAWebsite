@@ -33,6 +33,7 @@
   <link rel="stylesheet"       href="./modules/color/color.css"/>
   <link rel="stylesheet"       href="./modules/default/default.css"/>
   <link rel="stylesheet"       href="./index.css"/>
+  <script type="module"        src="./index.js"></script>
 </head>
 
 <body>
@@ -57,28 +58,109 @@
     </div>
   </div> <!-- titleContainer -->
 
+  <h2>Description</h2>
+
   <div class=note>
     <b>Note:</b> this was written on 25 March 2026. Cloudflare's site
-    changes quickly, but the gist of the steps should be the same.
+    changes quickly, but the steps should be about the same.
   </div>
 
-  <br>
-  You can set up a website and have Cloudflare serve it for free.  You
-  get your content distributed to edge machines globally, lots of
-  security and protection, compression, encryption, SSL tokens,
-  etc. Cloudflare is a lot easier to set up and maintain than using
-  AWS.
-  <br><br>
+  You can set up a website and have Cloudflare serve it for free.
+  <ul class=ulWithGap>
+    <li class=liTight>&bull;&nbsp; content is distributed globally to edge machines</li>
+    <li class=liTight>&bull;&nbsp; <i><b>lots</b></i> of security and protection</li>
+    <li class=liTight>&bull;&nbsp; encryption and compression</li>
+    <li class=liTight>&bull;&nbsp; free SSL tokens and automatic renewal</li>
+    <li class=liTight>&bull;&nbsp; easier to understand, set up, and maintain over
+    AWS</li>
+    <li class=liTight>&bull;&nbsp; analytics, monitoring, and overview dashboards</li>
+    <li class=liTight>&bull;&nbsp; ample but meh documentation</li>
+        <li class=liTight>&bull;&nbsp; a user interface that is actually
+          improving rather than getting worse <i>(kudos to the team)</i></li>
+    <li class=liTight>&bull;&nbsp; all this for <i><b>free</b></i>
+      (other than the ICANN cost of the domain name)</li>
+  </ul>
+  Cloudflare does not provide a virtual machine, so I <i>do</i> use AWS
+  lightsail for some sites.
+
+  <h2>Steps</h2>
 
   <ol>
     <li><a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
            href="https://rg3h.github.io/howToCreateADomain/">
         create a domain name&nbsp;
         <svg width=16 height=16><use href="#arrowBox"/></svg></a>
-      (or use one you already have)
     </li>
-    <li>upload content using one of several methods:</li>
-    <ul>
+    <li><details class="accordion">
+      <summary>connect content using github</summary>
+      <br>
+      You can put your content on github (for example, create a repo
+      called www.yoursite.com) and then connect cloudflare to the
+      github repository. Then everytime you push content, cloudflare
+      runs a worker to publish the content. You can control automatic
+      builds, use branches and preview links before publishing, etc.
+
+      <div class=warning>
+        <b>Warning:</b> if you deploy using github you cannot
+        switch to Direct Upload later.
+      </div>
+
+      <div class=note>
+        <b>Note:</b> before beginning, I recommend you name your
+        github repo www.yoursite.com to match the domain
+      </div>
+
+      <div class=note>
+        <b>Note:</b> you can generate preview URLS for other
+        branches without affecting your production deployment.
+      </div>
+
+      <div class=note>
+        <b>Note:</b> If you do not want to trigger deployments when
+        you push to github, include [skip ci] in the commit message (see
+        <a href="otherThings">Other Things To Do</a>).
+      </div>
+      <br>
+      <ol>
+        <li>on the cloudflare main dashboard click on the blue
+          +Add button</li>
+        <li>from the drop-down menu pick Pages</li>
+        <li>select import an existing Git repository</li>
+        <li>give cloudflare access to the github repo by clicking
+          on the link:<br> "If your repository is not shown, configure
+          repository access for the Cloudflare Pages app on GitHub."
+        </li>
+        <li>this opens a new tab and confirms access by using your
+          2-auth on your phone
+        </li>
+        <li>scroll down to "Repository Access" and click "Only
+          select repositories" and select the repo</li>
+        <li>close the tab and go back to the cloudflare tab. You
+          should see a box with repo now
+        </li>
+        <li>click on the repo box's small checkmark and then the
+          Begin Setup button</li>
+        <li>set the root directory to /public and click "Save and
+          Deploy"<br> this creates a site at
+          https://www-yoursite-com.pages.dev/
+        </li>
+        <li>click on the add a custom domain (on the success page)<br>
+          (this is the same as dashboard → compute → Workers & Pages
+          and then selecting the Custom domains tab along the top)
+        </li>
+        <li>click on add a custom domain and enter it as
+          www.yoursite.com (full name, not just the APEX)
+        </li>
+        <li>wait a few minutes for the site to activate</li>
+      </ol>
+
+      You will need to do some more things such as redirecting the
+      bare APEX name to www, setting up an error.html page, etc.
+      Click on <a href="#otherThings">Other Things To Do</a>
+    </details></li>
+
+    <li> other ways to connect content to Cloudflare:</li>
+      <ul>
       <!-- ---------------------------------------------------------- -->
       <li><details class="accordion">
           <summary>use drag and drop</summary>
@@ -142,94 +224,6 @@
               <td>Auto</td>
             </tr>
           </table>
-
-          <h3>References</h3>
-          <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
-             href="https://developers.cloudflare.com/pages/get-started/direct-upload/">
-            Getting started: direct upload
-            &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
-          </a>
-          <br>
-          <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
-             href="https://developers.cloudflare.com/pages/get-started/direct-upload/#wrangler-cli">
-            Getting started: direct upload with Wrangler
-            &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
-          </a>
-      </details></li>
-
-      <!-- --------------------------------------------------------------- -->
-      <li><details class="accordion">
-          <summary>connect to github</summary>
-          <h2 id="usingGitHub">Using github</h2>
-
-          You can put your content on github (for example, create a
-          repo called www.yoursite.com) and then connect cloudflare to
-          the github repository. Then everytime you push content,
-          cloudflare runs a worker to publish the content. You can
-          control automatic builds, use branches and preview links
-          before publishing, etc.
-
-          <div class=warning>
-            <b>Warning:</b> if you deploy using github you cannot
-            switch to Direct Upload later.
-          </div>
-
-          <div class=note>
-            <b>Note:</b> before beginning, I recommend you name your
-            github repo www.yoursite.com to match the domain
-          </div>
-
-          <div class=note>
-            <b>Note:</b> you can generate preview URLS for other
-            branches without affecting your production deployment.
-            And if you do not want to trigger deployments every time
-            you push, you can disable deployments (see
-            the <a href="otherThings">Other Things</a> section).
-          </div>
-          <br>
-          <ol>
-            <li>on the cloudflare main dashboard click on the blue
-            +Add button</li>
-            <li>from the drop-down menu pick Pages</li>
-            <li>select import an existing Git repository</li>
-            <li>give cloudflare access to the github repo by clicking
-              on the link:<br> "If your repository is not shown, configure
-              repository access for the Cloudflare Pages app on GitHub."
-            </li>
-            <li>this opens a new tab and confirms access by using your
-              2-auth on your phone
-            </li>
-            <li>scroll down to "Repository Access" and click "Only
-              select repositories" and select the repo</li>
-            <li>close the tab and go back to the cloudflare tab. You
-              should see a box with repo now
-            </li>
-            <li>click on the repo box's small checkmark and then the
-              Begin Setup button</li>
-            <li>set the root directory to /public and click "Save and
-              Deploy"<br> this creates a site at
-              https://www-yoursite-com.pages.dev/
-            </li>
-            <li>click on the add a custom domain (on the success page)<br>
-              (this is the same as dashboard → compute → Workers & Pages
-              and then selecting the Custom domains tab along the top)
-            </li>
-            <li>hit the add a custom domain and enter it as
-              www.yoursite.com (full name, not just the APEX name)
-            </li>
-            <li>wait a few minutes for the site to activate</li>
-          </ol>
-
-          You will need to do some more things such as redirecting the
-          APEX to www, setting up an error.html page, etc.
-          Click <a href="#otherThings">Other Things To Do</a>
-
-          <h3>References</h3>
-          <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
-             hre="https://developers.cloudflare.com/pages/get-started/git-integration/">
-            getting started: git integration
-            &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
-          </a><br>
       </details></li>
 
       <!-- ---------------------------------------------------------- -->
@@ -281,26 +275,22 @@
       </details></li>
 
       <!-- ---------------------------------------------------------- -->
-      <li><details class="accordion">
-          <summary>connect to AWS</summary>
-          <h2 id="usingAWS">Connecting to AWS</h2> To connect a
-          cloudflare domain to AWS,
-          <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
-             href="https://www.medley.place/webServerNotes/cloudflareNotes/connectCloudflareToS3">see these instructions
-            &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
-          </a><br>
-      </details></li>
+      <li><a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
+             href="https://www.medley.place/webServerNotes/cloudflareNotes/connectCloudflareToS3">connect to AWS
+          &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
+          </a>
+      </li>
     </ul>
 
     <!-- ---------------------------------------------------------- -->
     <li><details class="accordion">
-        <summary>set up additional configuration information</summary>
+        <summary>set up additional configuration</summary>
         <h2 id="otherThings">Other Things To Do</h2> Now that you have
         connected your custom domain to cloudflare's pages mechanism,
         there are several things to do to finish up (such as setting
         up error pages, redirecting apex to www, toggling builds, etc).
 
-        <h3 class=h3Variation>How to redirect http to https</h3>
+        <h3 class=h3WithTopBorder>How to redirect http to https</h3>
         <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
            href="https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/">
           always use https
@@ -311,7 +301,7 @@
         go to edge certificates<br>
         turn on Always Use HTTPS<br>
 
-        <h3 class=h3Variation>How to redirect apex/root to www</h3>
+        <h3 class=h3WithTopBorder>How to redirect apex/root to www</h3>
         for example: https://yoursite.com to https://www.yoursite.com<br>
         cloudflare go to yoursite.com<br>
         pick DNS records on left and add DNS record:<br>
@@ -328,7 +318,7 @@
         Then redirect to target URL: https://www.yoursite.com/${1}<br>
         check the preserve query string<br>
 
-        <h3 class=h3Variation>How To redirect a url to another one
+        <h3 class=h3WithTopBorder>How To redirect a url to another one
         cloudflare website</h3>
 
         <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
@@ -347,7 +337,7 @@
         change to static, leave the code 301<br>
         put in https://www.richgossweiler.place</br>
 
-        <h3 class=h3Variation>Setting Up Error Redirection</h3>
+        <h3 class=h3WithTopBorder>Setting Up Error Redirection</h3>
         When an error occurs on your site, a generic 404 page will
         appear. If you create an error.html page in the root (public/error.html)
         you can customize the page (just remember to use absolute references
@@ -392,7 +382,7 @@
           &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
         </a><br>
 
-        <h3 class=h3Variation>Disable Automatic Builds on Branches</h3>
+        <h3 class=h3WithTopBorder>Disable Automatic Builds on Branches</h3>
         Sometimes you don't want every push to the remote github repo to
         generate a build for the production deployment.
         <br><br>
@@ -408,7 +398,7 @@
           branch deployments)</li>
         </ol>
 
-        <h3 class=h3Variation>Remove Cloudflare access to the Github Repo</h3>
+        <h3 class=h3WithTopBorder>Remove Cloudflare access to the Github Repo</h3>
         To Remove cloudflare access to github repo go to the applications
         page on github
         https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/
@@ -422,8 +412,11 @@
 
     </details></li>
   </ol>
+  <br>
 
-  <h2 style="font-size: 1.3rem; margin-top: 2rem;">References</h2>
+  <details class="accordion">
+    <summary><span class=h2>References</span></summary>
+
   <a class="boxArrowLink reference" target="_blank" rel="noopener noreferrer"
      href="https://developers.cloudflare.com/">
     cloudflare documentation
@@ -487,6 +480,12 @@
     gt: a tool to simplify your git and github repos
     &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
   </a>
+  </details>
+
+  <div class=smallMessage>
+    And we danced, on the brink of an unknown future,
+    to an echo from a vanished past. --John Wyndham
+  </div>
   </div> <!-- middle -->
 </body>
 </html>

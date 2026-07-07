@@ -130,30 +130,29 @@
           +Add button</li>
         <li>from the drop-down menu pick Pages</li>
         <li>select import an existing Git repository</li>
-        <li>give cloudflare access to the github repo by clicking
+        <li>on this page, down at the bottom in small grey font, click
           on the link:<br> "If your repository is not shown, configure
           repository access for the Cloudflare Pages app on GitHub."
         </li>
-        <li>this opens a new tab and confirms access by using your
-          2-auth on your phone
+        <li>this opens a new tab and asks for your github six digit
+          auth code from the auth app on your phone
         </li>
         <li>scroll down to "Repository Access" and click "Only
           select repositories" and select the repo</li>
-        <li>close the tab and go back to the cloudflare tab. You
-          should see a box with repo now
+        <li>close the tab and go back to the cloudflare tab and
+          refresh. You should see a box with repo now
         </li>
-        <li>click on the repo box's small checkmark and then the
-          Begin Setup button</li>
-        <li>set the root directory to /public and click "Save and
-          Deploy"<br> this creates a site at
+        <li>click on the repo box and then the Begin Setup button</li>
+        <li>set the root directory (advanced) and set to /public. Then
+          click "Save and Deploy"<br> this creates a site at
           https://www-yoursite-com.pages.dev/
         </li>
-        <li>click on the add a custom domain (on the success page)<br>
+        <li>click on "add a custom domain" box (on the success page)<br>
           (this is the same as dashboard → compute → Workers & Pages
           and then selecting the Custom domains tab along the top)
         </li>
         <li>click on add a custom domain and enter it as
-          www.yoursite.com (full name, not just the APEX)
+          www.yoursite.com (<b>full name</b>, not just the APEX)
         </li>
         <li>wait a few minutes for the site to activate</li>
       </ol>
@@ -294,36 +293,40 @@
         there are several things to do to finish up (such as setting
         up error pages, redirecting apex to www, toggling builds, etc).
 
-        <h3 class=h3WithTopBorder>How to redirect http to https</h3>
+
+        <h3 class=h3WithTopBorder>Always Use HTTPS</h3>
         <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
            href="https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/">
           always use https
            &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
         </a><br>
-        go to SSL/TLS<br>
-        turn off encryption<br>
-        go to edge certificates<br>
+        go to managing the specific domain<br>
+        select SSL/TLS on the right sidebar, then configure. It should be on<br>
+        on the sidebar → edge certificates, turn on always use HTTPS<br>
         turn on Always Use HTTPS<br>
+
+
+        <h3 class=h3WithTopBorder>How to redirect http to https</h3>
+        in the left sidebar pick rules → overview<br>
+        add template rule redirect from HTTP to HTTPS<br>
+        use the defaults and deploy<br>
+
 
         <h3 class=h3WithTopBorder>How to redirect apex/root to www</h3>
         for example: https://yoursite.com to https://www.yoursite.com<br>
         cloudflare go to yoursite.com<br>
         pick DNS records on left and add DNS record:<br>
-        A @ 192.0.2.1 proxied<br>
-        pick rules on left side<br>
-        pick template button over on the right by add (picture):<br>
-        add template rule to redirect root to www<br>
-        if the button is not there, then pick the template box on the page<br>
-        labeled:<br>
-        Redirect from root to www<br>
+             A @ 192.0.2.1 proxied<br>
+        in the left sidebar pick rules → overview<br>
+        add template rule to redirect from root to www<br>
         use the defaults:<br>
         incoming match: wildcard pattern<br>
         request URL https://yoursite.com/*<br>
         Then redirect to target URL: https://www.yoursite.com/${1}<br>
         check the preserve query string<br>
 
-        <h3 class=h3WithTopBorder>How To redirect a url to another one
-        cloudflare website</h3>
+
+        <h3 class=h3WithTopBorder>Aliasing one domain name to another</h3>
 
         <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
            href="https://developers.cloudflare.com/fundamentals/manage-domains/redirect-domain/">
@@ -339,7 +342,7 @@
         use template for redirect to a different domain<br>
         all incoming requests<br>
         change to static, leave the code 301<br>
-        put in https://www.richgossweiler.place</br>
+        put in https://www.your-domain.com</br>
 
         <h3 class=h3WithTopBorder>Setting Up Error Redirection</h3>
         When an error occurs on your site, a generic 404 page will
@@ -391,7 +394,7 @@
         generate a build for the production deployment.
         <br><br>
         You can skip a cloudflare build by adding a prefix to the
-        commit message: commit -m [CI skip] ...
+        commit message: commit -m [skip ci] ...
         <br><br>
         You can also turn off automatic builds:
         <ol>

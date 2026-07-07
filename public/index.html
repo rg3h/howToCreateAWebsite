@@ -327,13 +327,6 @@
 
 
         <h3 class=h3WithTopBorder>Aliasing one domain name to another</h3>
-
-        <a class="boxArrowLink" target="_blank" rel="noopener noreferrer"
-           href="https://developers.cloudflare.com/fundamentals/manage-domains/redirect-domain/">
-          redirecting a domain
-          &nbsp;<svg width=16 height=16><use href="#arrowBox"/></svg>
-        </a><br>
-
         create two records on the from url:<br>
         A	@	192.0.2.1	Proxied<br>
         A	www	192.0.2.1	Proxied<br>
@@ -343,6 +336,7 @@
         all incoming requests<br>
         change to static, leave the code 301<br>
         put in https://www.your-domain.com</br>
+
 
         <h3 class=h3WithTopBorder>Setting Up Error Redirection</h3>
         When an error occurs on your site, a generic 404 page will
